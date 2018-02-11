@@ -1,6 +1,6 @@
 import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL,LOGIN_USER} from '../actions/type';
 
-const INITIAL_STATE = { email: '', password: '', user: null, error: '', loading: false};
+const INITIAL_STATE = { email: 'user@test.com', password: 'password', user: null, error: '', loading: false};
 
 export default (state = INITIAL_STATE, action) => {
     console.log(action);

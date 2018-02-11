@@ -3,7 +3,8 @@ import { View } from 'react-native';
 
 const CardSection =(props) => {
     return (
-        <View style={style.containerStyle}>
+        //this trick means use the right most if there is value
+        <View style={[style.containerStyle, props.style]}>
             {props.children}
         </View>
     );
