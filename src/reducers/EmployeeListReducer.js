@@ -2,12 +2,12 @@ import { EMPLOYEE_FETCH} from '../actions/type';
 
 const INITIAL_STATE = {};
 
-export default (state = INITIAL_STATE, action) => {
-    console.log(action);
+export default (state = INITIAL_STATE, action) => { 
 
     switch (action.type) {
         case EMPLOYEE_FETCH:
-            return { ...state, [action.payload.prop]: action.payload.value }
+        //console.log(action.payload);
+            return action.payload;
 
         default:
             return state;
