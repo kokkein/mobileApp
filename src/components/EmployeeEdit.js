@@ -4,8 +4,17 @@ import { Card, CardSection, Input, Button, Spinner } from './common';
 import {connect} from 'react-redux';
 import {employeeUpdate,employeeCreate} from '../actions';
 import EmployeeForm from './EmployeeForm';
+import _ from 'lodash';
 
-class EmployeeCreate extends Component {
+
+class EmployeeEdit extends Component {
+    componentWillMount(){
+        console.log(this.props);
+        _.each(this.props.selectedEmployee, (value, prop)=>{
+            this.props.employeeUpdate({prop, value});
+        });
+    };
+
     buttonSavePress(){
         const {name, phone, shift} = this.props;
 
@@ -39,4 +48,4 @@ const mapStateToProps = (state) =>{
     return {name, phone, shift};
 };
 
-export default connect(mapStateToProps, {employeeUpdate,employeeCreate}) (EmployeeCreate);
+export default connect(mapStateToProps, {employeeUpdate,employeeCreate}) (EmployeeEdit);
