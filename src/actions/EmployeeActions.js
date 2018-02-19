@@ -1,4 +1,4 @@
-import {EMPLOYEE_UPDATE,EMPLOYEE_CREATE,EMPLOYEE_RESET,EMPLOYEE_FETCH} from './type';
+import {EMPLOYEE_UPDATE,EMPLOYEE_CREATE,EMPLOYEE_RESET,EMPLOYEE_FETCH,EMPLOYEE_EDIT,EMPLOYEE_DELETE} from './type';
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 
@@ -28,6 +28,34 @@ export const employeeFetch = () => {
         firebase.database().ref(`/users/${currentUser.uid}/employees`)
         .on('value', snapshot=>{
             dispatch({type: EMPLOYEE_FETCH, payload: snapshot.val()});
+        });
+    };
+
+};
+
+export const employeeEdit = ({name, phone, shift, uid}) => {
+    const {currentUser} = firebase.auth();
+    //firebase.database().ref('/users/userId/employees')
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+        .set({name, phone, shift})
+        .then(() => {
+            dispatch({type: EMPLOYEE_EDIT});
+            Actions.pop()
+        });
+    };
+
+};
+
+export const employeeDelete = ({uid}) => {
+    const {currentUser} = firebase.auth();
+    //firebase.database().ref('/users/userId/employees')
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+        .remove()
+        .then(() => {
+            //dispatch({type: EMPLOYEE_DELETE});
+            Actions.pop()
         });
     };
 
